@@ -3,6 +3,7 @@ import "./App.css";
 import Description from "./components/Description/Description";
 import Feedback from "./components/Feedback/Feedback";
 import Option from "./components/Options/Options";
+import Notification from "./components/Notification/Notification";
 
 function App() {
   const [feedbacks, setFeedbacks] = useState({
@@ -10,19 +11,12 @@ function App() {
     neutral: 0,
     bad: 0,
   });
-  console.log(feedbacks);
-  console.log(feedbacks.good);
-  console.log(feedbacks.neutral);
-  console.log(feedbacks.bad);
 
-  const handleGood = () => {
-    setFeedbacks({ ...feedbacks, good: feedbacks.good + 1 });
-  };
-  const handleNeutral = () => {
-    setFeedbacks({ ...feedbacks, neutral: feedbacks.neutral + 1 });
-  };
-  const handleBad = () => {
-    setFeedbacks({ ...feedbacks, bad: feedbacks.bad + 1 });
+  let totalFeedback = feedbacks.good + feedbacks.neutral + feedbacks.bad; //good + neutral + bad;
+  let positiveFeedback = Math.round((feedbacks.good / totalFeedback) * 100);
+
+  const updateFeedback = (feedbackType) => {
+    setFeedbacks({ ...feedbacks, [feedbackType]: feedbacks[feedbackType] + 1 });
   };
 
   // ==========================================================
@@ -31,9 +25,17 @@ function App() {
       <Description />
       <Option
         value={feedbacks}
-        onUpdate={{ handleGood, handleNeutral, handleBad }}
+        onUpdate={updateFeedback}
+        total={totalFeedback}
       />
-      <Feedback feedbacks={feedbacks} />
+      {totalFeedback && (
+        <Feedback
+          feedbacks={feedbacks}
+          total={totalFeedback}
+          positiv={positiveFeedback}
+        />
+      )}
+      {!totalFeedback && <Notification />}
     </>
   );
 }

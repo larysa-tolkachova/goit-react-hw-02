@@ -1,9 +1,10 @@
-function Options({ value, onUpdate }) {
+function Options({ value: { good, neutral, bad }, onUpdate, total }) {
   return (
     <div>
-      <button onClick={onUpdate.handleGood}>Good: {value.good}</button>
-      <button onClick={onUpdate.handleNeutral}>Neutral {value.neutral}</button>
-      <button onClick={onUpdate.handleBad}>Bad {value.bad}</button>
+      <button onClick={() => onUpdate("good")}>Good: {good}</button>
+      <button onClick={() => onUpdate("neutral")}>Neutral: {neutral}</button>
+      <button onClick={() => onUpdate("bad")}>Bad: {bad}</button>
+      {total > 0 && <button onClick={() => {}}>Reset</button>}
     </div>
   );
 }
