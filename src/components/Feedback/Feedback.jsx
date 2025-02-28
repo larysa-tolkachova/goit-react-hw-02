@@ -1,11 +1,23 @@
+import css from "./Feedback.module.css";
+
 function Feedback({ feedbacks, total, positiv }) {
   return (
     <>
-      <p>Good: {feedbacks.good}</p>
-      <p>Neutral: {feedbacks.neutral}</p>
-      <p>Bad: {feedbacks.bad}</p>
-      <p>Total: {total}</p>
-      <p>Positiv: {total ? positiv : 0} %</p>
+      <p className={css.rezult}>
+        <b>Good</b>: {feedbacks.good}
+      </p>
+      <p className={css.rezult}>
+        <b>Neutral</b>: {feedbacks.neutral}
+      </p>
+      <p className={css.rezult}>
+        <b>Bad</b>: {feedbacks.bad}
+      </p>
+      <p className={css.rezult}>
+        <b>Total</b>: {total}
+      </p>
+      <p className={css.rezult}>
+        <b>Positiv</b>: {total ? positiv : 0} %
+      </p>
     </>
   );
 }

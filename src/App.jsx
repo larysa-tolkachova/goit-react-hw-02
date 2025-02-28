@@ -19,6 +19,13 @@ function App() {
     setFeedbacks({ ...feedbacks, [feedbackType]: feedbacks[feedbackType] + 1 });
   };
 
+  const resetFeedbacks = () => {
+    setFeedbacks({
+      good: 0,
+      neutral: 0,
+      bad: 0,
+    });
+  };
   // ==========================================================
   return (
     <>
@@ -27,8 +34,9 @@ function App() {
         value={feedbacks}
         onUpdate={updateFeedback}
         total={totalFeedback}
+        onReset={resetFeedbacks}
       />
-      {totalFeedback && (
+      {totalFeedback > 0 && (
         <Feedback
           feedbacks={feedbacks}
           total={totalFeedback}
